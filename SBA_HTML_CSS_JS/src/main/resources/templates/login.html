@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Metadata about the document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Saroja Tuition Centre</title>
+
+    <!--Script tag for Google web font-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* General styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightcyan;
+        }
+
+        /* Styles for the login container */
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Styles for the heading inside the login container */
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+       /* Styles for the form elements inside the login container */
+        .login-container select,
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Styles for the submit button */
+        .login-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styles for the submit button on hover */
+        .login-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Styles for error messages */
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        /* Specific styles for h2 elements */
+        h2{
+            color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+
+    <!-- Login heading -->
+    <h2><u>Login</u></h2>
+
+    <!-- Login form -->
+    <form id="loginForm">
+
+        <!-- Role selection dropdown -->
+        <select id="role" name="role" required>
+            <option value="" disabled selected>Please select your role</option>
+            <option value="parent">Parent</option>
+            <option value="teacher">Teacher</option>
+            <option value="management">Management</option>
+        </select>
+
+        <!--  message for role selection -->
+        <div id="roleError" class="error">Please select your role.</div>
+
+        <!-- Username input field -->
+        <input type="text" id="username" name="username" placeholder="Username" required>
+
+        <!-- Error message for username -->
+        <div id="usernameError" class="error">Username must be alphanumeric and 3-15 characters long.</div>
+
+        <!-- Password input field -->
+        <input type="password" id="password" name="password" placeholder="Password" required>
+
+        <!-- Error message for password -->
+        <div id="passwordError" class="error">Password must be at least 6 characters long and contain at least one letter and one number.</div>
+
+        <!-- Submit button -->
+        <input type="submit" value="Login">
+    </form>
+</div>
+<script>
+
+    // Add event listener for form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get form field values
+        var role = document.getElementById('role').value;
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        // Get error message elements
+        var roleError = document.getElementById('roleError');
+        var usernameError = document.getElementById('usernameError');
+        var passwordError = document.getElementById('passwordError');
+
+        // Show or hide error messages based on validation
+        var roleValid = role !== "";
+        var usernameValid = /^[a-zA-Z0-9]{3,15}$/.test(username);
+        var passwordValid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
+
+
+        // Display or hide error messages based on validation
+        roleError.style.display = roleValid ? 'none' : 'block';
+        usernameError.style.display = usernameValid ? 'none' : 'block';
+        passwordError.style.display = passwordValid ? 'none' : 'block';
+
+        if (roleValid && usernameValid && passwordValid) {
+            // Proceed with form submission or further processing
+            alert('Login successful!');
+        }
+    });
+</script>
+</body>
+</html>
